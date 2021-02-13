@@ -1,0 +1,33 @@
+	ORG 4000H
+	MOV PSW, #08H
+;
+	MOV 20H, #0B5H
+	CLR A
+;
+	MOV C, 20H.0
+	ADDC A, #0
+	MOV C, 20H.1
+	ADDC A, #0
+	MOV C, 20H.2
+	ADDC A, #0
+	MOV C, 20H.3
+	ADDC A, #0
+	MOV C, 20H.4
+	ADDC A, #0
+	MOV C, 20H.5
+	ADDC A, #0
+	MOV C, 20H.6
+	ADDC A, #0
+	MOV C, 20H.7
+	ADDC A, #0
+	MOV 21H, A
+;
+	MOV B, #2
+	DIV AB
+	MOV 21H, B
+;
+	MOV PSW, #0H
+	JMP 0057H
+;
+	END
+	

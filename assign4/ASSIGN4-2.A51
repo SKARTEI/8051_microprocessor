@@ -1,0 +1,61 @@
+	ORG 4000H
+	MOV PSW, #08H
+;
+	MOV 21H, #37H
+	MOV 22H, #44H
+	MOV A, 21H
+	MOV B, 22H
+;
+	CALL ACTA
+	MOV R0, A
+	CALL ACTB
+	MOV A, R0
+	SWAP A
+	ORL A, B
+	MOV 20H, A
+;
+	MOV PSW, #0H
+	JMP 0057H
+;
+ACTA:
+	MOV R0, A
+	CLR C
+	SUBB A, #60
+	JC SMA
+	SJMP ALA
+;
+SMA:
+	MOV A, R0
+	CLR C
+	SUBB A, #48
+	JMP FINA
+;
+ALA:
+	MOV A, R0
+	SUBB A, #55
+;
+FINA: RET
+;
+ACTB:
+	MOV A, B
+	CLR C
+	SUBB A, #60
+	JC SMB
+	SJMP ALB
+;
+SMB:
+	MOV A, B
+	CLR C
+	SUBB A, #48
+	MOV B, A
+	JMP FINA
+;
+ALB:
+	MOV A, B
+	SUBB A, #55
+	MOV B, A
+;
+FINB: RET
+;
+	END
+	

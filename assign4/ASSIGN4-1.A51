@@ -1,0 +1,56 @@
+	ORG 4000H
+	MOV PSW, #08H
+;
+	MOV 20H, #6EH
+	MOV A, 20H
+	MOV B, #16
+	DIV AB
+;
+    CALL CALA
+	MOV 21H, A
+	CALL CALB
+	MOV 22H, B
+;
+	MOV PSW, #0H
+	JMP 0057H
+;
+CALA: 
+	MOV R0, A
+	CLR C
+	SUBB A, #10
+	JC NUMA
+	SJMP ABCA
+;
+ABCA:
+	MOV A, R0
+	ADD A, #55
+	JMP ENDA
+;
+NUMA:
+	MOV A, R0
+	ADD A, #48
+;
+ENDA: RET
+;
+CALB: 
+	MOV A, B
+	CLR C
+	SUBB A, #10
+	JC NUMB
+	SJMP ABCB
+;
+ABCB:
+	MOV A, B
+	ADD A, #55
+	MOV B, A
+	JMP ENDB
+;
+NUMB:
+	MOV A, B
+	ADD A, #48
+	MOV B, A
+;
+ENDB: RET
+;
+	END
+	

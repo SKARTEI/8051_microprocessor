@@ -1,0 +1,21 @@
+	ORG 4000H
+	MOV PSW, #08H
+;
+	MOV R0, #88H
+	MOV R1, #77H
+;
+	MOV A, R0
+	ADD A, R1
+	DA A
+	MOV R3, A
+;
+	MOV A, #0H
+	ADDC A, #0H
+	DA A
+	MOV R2, A
+;
+	MOV PSW, #0H
+	JMP 0057H
+;
+	END
+	

@@ -1,0 +1,53 @@
+;
+	ORG 4000H
+	SJMP START
+;
+	ORG 4003H
+	SJMP CHANGE
+;
+START: MOV A, #11111110B
+	MOV P1, A
+;
+	SETB IT0 
+	SETB EX0 
+	SETB EA 
+;
+LEFT: 
+	JNB 20H.0, RIGHT
+	SETB 20H.0
+	RL A
+	MOV P1, A
+	CALL DELAY
+	SJMP LEFT
+;
+CHANGE: 
+	CPL 20H.0
+	RETI
+;
+RIGHT:
+	JB 20H.0, LEFT
+	CLR 20H.0
+	RR A
+	MOV P1, A
+	CALL DELAY
+	SJMP RIGHT
+;
+
+DELAY: MOV R1, #242   
+;
+REP1: MOV R2, #242   
+REP2: 
+        NOP      
+	NOP            
+	NOP                   
+	NOP              
+	NOP             
+	NOP  
+	NOP  
+	NOP  
+	NOP  
+	DJNZ   R2, REP2  
+	DJNZ   R1, REP1 
+	RET
+;
+	END
